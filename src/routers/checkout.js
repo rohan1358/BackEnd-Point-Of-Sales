@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 
 const Router = express.Router();
-const checkoutController = require('../controllers/checkout');
+const checkoutController = require("../controllers/checkout");
 
-Router
-.post('/', checkoutController.checkoutOrder) // localhost:8080/api/v1/checkout
+Router.post("/", checkoutController.checkoutOrder) // localhost:8080/api/v1/checkout
+  .get("/", checkoutController.history);
 
 module.exports = Router;
