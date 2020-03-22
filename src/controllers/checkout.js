@@ -4,9 +4,13 @@ const miscHelper = require("../helper/helper");
 // kontroller checkout
 module.exports = {
   checkoutOrder: (req, res) => {
-    const id_order = req.body.id_order;
+    const { invoices, total } = req.body;
+    const data = {
+      invoices,
+      total
+    };
     checkoutModel
-      .checkoutOrder(id_order)
+      .checkoutOrder(data)
       .then(result => {
         res.json(result);
       })
