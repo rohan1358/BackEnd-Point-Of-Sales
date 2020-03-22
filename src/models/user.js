@@ -16,7 +16,7 @@ module.exports={
     },
     loginUser: (name, password) =>{
         return new Promise((resolve, reject) => {
-            connecttion.query("SELECT * FROM user WHERE name=? AND password = ?", [name, password], (err, result) => {
+            connecttion.query("SELECT * FROM users WHERE name=? AND password = ?", [name, password], (err, result) => {
                 if(!err){
                     resolve(result);
                 }else{
