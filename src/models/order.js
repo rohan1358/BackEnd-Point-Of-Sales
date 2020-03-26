@@ -23,7 +23,7 @@ module.exports = {
   },
   getOrder: () => {
     return new Promise((resolve, reject) => {
-      connecttion.query("SELECT * FROM tbl_order", (err, result) => {
+      connecttion.query("SELECT invoices, users, dates, SUM(total) AS total, invoices from tbl_order GROUP BY invoices", (err, result) => {
         if (!err) {
           resolve(result);
         } else {
@@ -48,6 +48,7 @@ module.exports = {
     });
   },
   insertOrder: data => {
+    console.log(data);
     return new Promise((resolve, reject) => {
       connecttion.query("INSERT INTO tbl_order SET ?", data, (err, result) => {
         if (!err) {
@@ -93,5 +94,19 @@ module.exports = {
         }
       });
     });
-  }
+  },
+  history: () => {
+    return new Promise((resolve, reject) => {
+      connecttion.query(
+        "SELECT SUM(total) AS total, invoices from tbl_order GROUP BY invoices",
+        (err, result) => {
+          if (!err) {
+            resolve(result);
+          } else {
+            reject(new Error(err));
+          }
+        }
+      );
+    });
+  },
 };

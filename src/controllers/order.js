@@ -16,7 +16,7 @@ module.exports = {
   getOrder: (req, res) => {
     orderModel
       .getOrder()
-      .then(result => {
+      .then((result) => {
         res.json(result);
       })
       .catch(err => console.log(err));
@@ -42,13 +42,16 @@ module.exports = {
 
   // fungsi yang akan di eksekusi oleh post order
   insertOrder: (req, res) => {
-    const { product_id, qty, total, invoices } = req.body;
+    const { product_id, qty, total, invoices, dates, users } = req.body;
     const data = {
       product_id,
       qty,
       total,
-      invoices
+      invoices,
+      dates,
+      users
     };
+    console.log(product_id);
     // orderModel.insertOrder(data)
     //     .then((result) => {
     //         res.json(result);
@@ -82,5 +85,12 @@ module.exports = {
     });
 
     // melempar 2 variaabe kedalam file model untuk di eksekusi dengan query insert kedalam table tbl_order
-  }
+  },
+  history: (req, res) =>{
+    orderModel.history()
+    .then((result) => {
+        miscHelper.response(res, result, 200)
+    })
+    .catch(err => console.log(err));
+},
 };
