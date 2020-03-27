@@ -16,7 +16,7 @@ module.exports = {
   getOrder: (req, res) => {
     orderModel
       .getOrder()
-      .then((result) => {
+      .then(result => {
         res.json(result);
       })
       .catch(err => console.log(err));
@@ -42,14 +42,15 @@ module.exports = {
 
   // fungsi yang akan di eksekusi oleh post order
   insertOrder: (req, res) => {
-    const { product_id, qty, total, invoices, dates, users } = req.body;
+    const { product_id, qty, total, invoices, dates, users, year } = req.body;
     const data = {
       product_id,
       qty,
       total,
       invoices,
       dates,
-      users
+      users,
+      year
     };
     console.log(product_id);
     // orderModel.insertOrder(data)
@@ -86,11 +87,39 @@ module.exports = {
 
     // melempar 2 variaabe kedalam file model untuk di eksekusi dengan query insert kedalam table tbl_order
   },
-  history: (req, res) =>{
-    orderModel.history()
-    .then((result) => {
-        miscHelper.response(res, result, 200)
-    })
-    .catch(err => console.log(err));
-},
+  history: (req, res) => {
+    orderModel
+      .history()
+      .then(result => {
+        miscHelper.response(res, result, 200);
+      })
+      .catch(err => console.log(err));
+  },
+  todayIncome: (req, res) => {
+    console.log("masuk controller");
+    orderModel
+      .todayIncome()
+      .then(result => {
+        res.json(result);
+      })
+      .catch(err => console.log(err));
+  },
+  yearIncome: (req, res) => {
+    console.log("masuk controller");
+    orderModel
+      .yearIncome()
+      .then(result => {
+        res.json(result);
+      })
+      .catch(err => console.log(err));
+  },
+  allOrder: (req, res) => {
+    console.log("masuk controller");
+    orderModel
+      .allOrder()
+      .then(result => {
+        res.json(result);
+      })
+      .catch(err => console.log(err));
+  }
 };
