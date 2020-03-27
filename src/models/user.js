@@ -27,7 +27,7 @@ module.exports={
     },
     insertUser:(data) => {
         return new Promise((resolve, reject) => {
-            connecttion.query("INSERT INTO user SET ?", data, (err, result) =>{
+            connecttion.query("INSERT INTO users SET ?", data, (err, result) =>{
                 if (!err) {
                     resolve(result);
                 }else{

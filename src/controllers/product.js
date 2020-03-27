@@ -41,7 +41,7 @@ module.exports = {
         const  {name, price, id_categori, stock} = req.body;
         const data = {
             name,
-            image: `http://localhost:8080/upload/${req.file.filename}`,
+            image: `http://localhost:8012/upload/${req.file.filename}`,
             price,
             id_categori,
             stock

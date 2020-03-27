@@ -23,20 +23,8 @@ module.exports = {
   },
   getOrder: () => {
     return new Promise((resolve, reject) => {
-      connecttion.query("SELECT invoices, users, dates, SUM(total) AS total, invoices from tbl_order GROUP BY invoices", (err, result) => {
-        if (!err) {
-          resolve(result);
-        } else {
-          reject(new Error(err));
-        }
-      });
-    });
-  },
-  orderDetail: id_order => {
-    return new Promise((resolve, reject) => {
       connecttion.query(
-        "SELECT * FROM tbl_order WHERE id=?",
-        id_order,
+        "SELECT invoices, users, dates, SUM(total) AS total, invoices from tbl_order GROUP BY invoices ORDER BY id DESC",
         (err, result) => {
           if (!err) {
             resolve(result);
@@ -47,6 +35,21 @@ module.exports = {
       );
     });
   },
+  // orderDetail: id_order => {
+  //   return new Promise((resolve, reject) => {
+  //     connecttion.query(
+  //       "SELECT * FROM tbl_order WHERE id=?",
+  //       id_order,
+  //       (err, result) => {
+  //         if (!err) {
+  //           resolve(result);
+  //         } else {
+  //           reject(new Error(err));
+  //         }
+  //       }
+  //     );
+  //   });
+  // },
   insertOrder: data => {
     console.log(data);
     return new Promise((resolve, reject) => {
@@ -109,4 +112,46 @@ module.exports = {
       );
     });
   },
+  todayIncome: () => {
+    return new Promise((resolve, reject) => {
+      connecttion.query(
+        "SELECT SUM(total) AS Total FROM tbl_order GROUP BY dates DESC LIMIT 1",
+        (err, result) => {
+          if (!err) {
+            resolve(result);
+          } else {
+            reject(new Error(err));
+          }
+        }
+      );
+    });
+  },
+  yearIncome: () => {
+    return new Promise((resolve, reject) => {
+      connecttion.query(
+        "SELECT SUM(total) AS total, year FROM tbl_order GROUP BY year DESC LIMIT 1",
+        (err, result) => {
+          if (!err) {
+            resolve(result);
+          } else {
+            reject(new Error(err));
+          }
+        }
+      );
+    });
+  },
+  allOrder: () => {
+    return new Promise((resolve, reject) => {
+      connecttion.query(
+        "SELECT SUM(qty) AS total_order FROM tbl_order",
+        (err, result) => {
+          if (!err) {
+            resolve(result);
+          } else {
+            reject(new Error(err));
+          }
+        }
+      );
+    });
+  }
 };
