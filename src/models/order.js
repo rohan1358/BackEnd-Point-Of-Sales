@@ -115,7 +115,7 @@ module.exports = {
   todayIncome: () => {
     return new Promise((resolve, reject) => {
       connecttion.query(
-        "SELECT SUM(total) AS Total FROM tbl_order GROUP BY dates DESC LIMIT 1",
+        "SELECT SUM(total) AS Total FROM `tbl_order` GROUP BY dates LIMIT 1",
         (err, result) => {
           if (!err) {
             resolve(result);

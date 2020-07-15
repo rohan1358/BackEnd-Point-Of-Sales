@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const multer = require('multer');
 const auth = require('../helper/auth') 
-// const  = require('cors') 
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -16,14 +15,6 @@ const upload = multer({storage})
 
 const Router = express.Router();
 const productController = require('../controllers/product');
-
-// app.use(cors()
-// var corsOptions = {
-//     origin: 'http://example.com',
-//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-//   }
-
-// app.use(cors())
 
 Router
 .get('/page', auth.verify, productController.pageProduct)

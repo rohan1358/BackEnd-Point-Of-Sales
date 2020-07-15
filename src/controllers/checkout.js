@@ -9,6 +9,7 @@ module.exports = {
       invoices,
       total
     };
+    console.log(req.body)
     checkoutModel
       .checkoutOrder(data)
       .then(result => {

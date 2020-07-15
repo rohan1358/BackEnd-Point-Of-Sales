@@ -20,6 +20,7 @@ module.exports = {
         .catch(err => console.log(err));
     },
     insertProduct: (req, res) =>{
+        console.log(req.file)
         const  {name, price, id_categori, stock, image} = req.body;
         const data = {
             name,

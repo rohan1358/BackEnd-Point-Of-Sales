@@ -2,6 +2,7 @@ const express = require("express");
 
 const Router = express.Router();
 const orderController = require("../controllers/order");
+const order = require("../models/order");
 
 Router.get("/history", orderController.history)
 
@@ -16,6 +17,7 @@ Router.get("/history", orderController.history)
   // .get("/:id", orderController.orderDetail)
   .get("/todayIncome", orderController.todayIncome)
   .get("/yearIncome", orderController.yearIncome)
-  .get("/allorder", orderController.allOrder);
+  .get("/allorder", orderController.allOrder)
+  .post("/", orderController.insertOrder);
 
 module.exports = Router;
