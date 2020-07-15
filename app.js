@@ -19,7 +19,7 @@ const router = require("./src/routers/index");
 app.use(
   "/api/v1",
   (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://100.27.2.23:8012");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
     res.header(
       "Access-Control-Allow-Headers",

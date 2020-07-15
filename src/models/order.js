@@ -24,7 +24,7 @@ module.exports = {
   getOrder: () => {
     return new Promise((resolve, reject) => {
       connecttion.query(
-        "SELECT invoices, users, dates, SUM(total) AS total, invoices from tbl_order GROUP BY invoices ORDER BY id DESC",
+        "select sum(total) as total,users,dates, invoices from tasksatu.tbl_order  group by invoices, users, dates order by dates desc",
         (err, result) => {
           if (!err) {
             resolve(result);
